@@ -8,6 +8,12 @@
         <h1>Fancy Form!!</h1>
     </div>
     <div class="column">
+        {{ message }}<br>
+        {% if alreadyVoted == 1 %}
+        Dog votes: {{ dogVotes }}<br>
+        Cat votes: {{ catVotes }}
+        {% endif %}
+        <br/>
         <form method="POST">
             {{ voteForm.hidden_tag() }}
             {{ voteForm.userName.label }}: {{ voteForm.userName() }}<br/>

@@ -19,11 +19,25 @@ def vote():
         userName = voteForm.userName.data
         userChoice = voteForm.userVote.data
         session['userChoice'] = userChoice
-        alreadyVoted = redis_cli.exists(f"{userName}:vote")
+
+        # this returns 0 if it doesn't exist and 1 if it does... in python 0 is equivalent
+        # to false and 1 is equivalent to true
+        alreadyVoted = redis_cli.exists(f"{userName}")
         if alreadyVoted:
+            dogVotes = 0
+            catVotes = 0
             message = "You've already voted! You aren't allowed to vote again!"
-            return render_template("voting.html", message=message)
-        redis_cli.set(f"{userName}:vote", userChoice)
+            listOfKeys = redis_cli.keys("*")
+            for key in listOfKeys:
+                userVote = redis_cli.get(key).decode("utf-8")
+                if userVote == "dogs":
+                    dogVotes = dogVotes + 1
+                if userVote == "cats":
+                    catVotes = catVotes + 1
+
+            return render_template("voting.html", message=message, voteForm=voteForm, listOfKeys=listOfKeys,
+                                   dogVotes=dogVotes, catVotes=catVotes, alreadyVoted=alreadyVoted, userVote=userVote)
+        redis_cli.set(f"{userName}", userChoice)
 
 
     return render_template("voting.html", message=message, voteForm=voteForm)
