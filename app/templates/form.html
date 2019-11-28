@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title%}Sample Website Page Title {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>Fancy Form!!</h1>
+    </div>
+    <div class="column">
+        <form method="POST">
+            {{ sampleForm.hidden_tag() }}
+            {{ sampleForm.name.label }}: {{ sampleForm.name() }}
+            {{ sampleForm.age.label }}: {{ sampleForm.age() }}
+            {{ sampleForm.submit() }}
+        </form>
+        <hr>
+         {{ wtf.quick_form(sampleForm) }}
+    </div>
+</div>
+{% endblock %}
