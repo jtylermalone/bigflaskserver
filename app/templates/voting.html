@@ -5,13 +5,14 @@
 {% block content %}
 <div class="container">
     <div class="page-header">
-        <h1>Fancy Form!!</h1>
+        <h1>Vote for your favorite pet!</h1>
     </div>
     <div class="column">
         {{ message }}<br>
-        {% if alreadyVoted == 1 %}
+        {% if alreadyVoted == 0 %}
         Dog votes: {{ dogVotes }}<br>
-        Cat votes: {{ catVotes }}
+        Cat votes: {{ catVotes }}<br/>
+        Fish votes: {{ fishVotes }}
         {% endif %}
         <br/>
         <form method="POST">
