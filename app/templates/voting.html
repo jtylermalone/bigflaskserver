@@ -8,7 +8,9 @@
         <h1>Do you like dogs, cats, or fish better? Vote below!!</h1>
     </div>
     <div class="column">
+        <! whatever the message is, it's displayed here>
         <b>{{ message }}</b><br/>
+        <! as long as alreadyInDatabase has a value, this if statement executes>
         {% if alreadyInDatabase == 1 or alreadyInDatabase == 0 %}
         <br/><b>Voting results:</b><br/>
         {{ catVotes }} people have voted for cats!<br/>
@@ -19,6 +21,7 @@
         {{ goatVotes }} people have voted for goats!<br/>
         {% endif %}
         <br/>
+        <! if the user hasn't yet voted, the form is displayed for them>
         {% if session["alreadyVoted"] == "no" %}
         <form method="POST">
             {{ voteForm.hidden_tag() }}
